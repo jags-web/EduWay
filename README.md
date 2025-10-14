@@ -1,11 +1,42 @@
-EduWay – College Bus Tracking & Management System is a comprehensive, technology-driven solution designed to enhance the safety, efficiency, and convenience of college transportation. The system enables students and parents to track buses in real-time using GPS, receive instant notifications about delays or arrivals, and access accurate route information. Admins can easily manage bus routes, stops, and schedules, while integrating attendance and boarding information to ensure accountability. Built with a client-server architecture, EduWay leverages Android for the mobile app, Firebase Realtime Database / Cloud Firestore for backend, and Google Maps API for precise location tracking. Developed using Agile methodology, the project emphasizes incremental development, continuous testing, and user-centric design, ensuring reliability and responsiveness. By streamlining bus management, providing real-time updates, and improving communication between the college, students, and parents, EduWay addresses modern transportation challenges efficiently and effectively.
+# EduWay - College Bus Tracking & Management System
 
-Tech Stack
+## Overview
+**EduWay** is a comprehensive, technology-driven solution designed to enhance the **safety, efficiency, and convenience** of college transportation. The system enables students and parents to:
 
-Frontend: Android (Java/Kotlin)
+- Track buses in **real-time** using GPS
+- Receive **instant notifications** about delays or arrivals
+- Access accurate **route and stop information**
 
-Backend: Firebase Realtime Database / Cloud Firestore
+Admins can easily manage bus routes, stops, schedules, and integrate attendance or boarding information to ensure accountability.
 
-APIs: Google Maps API for location tracking
+---
 
-Version Control: Git & GitHub
+## Features
+- **Real-Time Bus Tracking:** Monitor bus locations on a live map.  
+- **Route Management:** Add, update, or remove routes and stops.  
+- **Notifications:** Automatic alerts for delays, arrivals, or route changes.  
+- **User Roles:** Separate interfaces for students, parents, and admin.  
+- **Attendance Integration:** Track student boarding and alighting.  
+
+---
+
+## Methodologies
+- **Agile Development:** Incremental development with continuous testing.  
+- **Client-Server Architecture:** Mobile app communicates with backend for real-time data.  
+- **GPS & Mapping Integration:** Google Maps API for precise tracking.  
+- **Database Management:** Firebase Realtime Database / Cloud Firestore for storage and retrieval.  
+
+---
+
+## Tech Stack
+- **Frontend:** Android (Java/Kotlin)  
+- **Backend:** Firebase Realtime Database / Cloud Firestore  
+- **APIs:** Google Maps API  
+- **Version Control:** Git & GitHub  
+
+---
+
+## Installation & Setup
+1. Clone the repository:  
+```bash
+git clone https://github.com/jags-web/EduWay
