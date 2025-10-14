@@ -2,6 +2,9 @@ EduWay – College Bus Tracking & Management System is a comprehensive, technolo
 
 Tech Stack
 Frontend: Android (Java/Kotlin)
+
 Backend: Firebase Realtime Database / Cloud Firestore
+
 APIs: Google Maps API for location tracking
+
 Version Control: Git & GitHub
