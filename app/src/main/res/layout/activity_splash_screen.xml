@@ -3,46 +3,72 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Splash_screen"
-    android:background="@color/white">
+    android:background="@color/Transparent_blue"
+    android:fitsSystemWindows="true"
+    tools:context=".Splash_screen">
 
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/img_1"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="48dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- EduWay Text -->
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EduWay"
-        android:textColor="#154DCE"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@id/imageView6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-         />
+        <!-- App Logo/Icon with White Color -->
+        <ImageView
+            android:id="@+id/logoView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="3dp"
+            android:contentDescription="EduWay Logo"
+            android:src="@drawable/imag5" />
 
-    <!-- Tagline -->
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="The Smarter Way to Reach Education"
-        android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/imageView6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        <TextView
+            android:id="@+id/appNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EduWay"
+            android:textColor="@color/white"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Tagline in Light Blue -->
+        <TextView
+            android:id="@+id/taglineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart College Bus Tracking"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="48dp" />
+
+        <!-- Loading Progress in White -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            android:progressBackgroundTint="@color/white" />
+
+        <!-- Version/Bottom Text in Light Blue -->
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Version 1.0"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginTop="32dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
