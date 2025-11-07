@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduWay">
         <activity
-            android:name=".login"
+            android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".user"
+            android:name=".User"
             android:exported="false" />
         <activity
-            android:name=".driver"
+            android:name=".Driver"
             android:exported="false" />
         <activity
             android:name=".Splash_screen"
