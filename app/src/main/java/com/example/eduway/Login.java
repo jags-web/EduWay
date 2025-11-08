@@ -1,6 +1,8 @@
 package com.example.eduway;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,11 @@ public class Login extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        findViewById(R.id.tvSignup).setOnClickListener(v -> {
+            Toast.makeText(Login.this, "Signup Text Clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 }
