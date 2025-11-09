@@ -1,37 +1,110 @@
 package com.example.eduway;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Driver extends AppCompatActivity {
+
+    EditText etName, etBusNumber, etEmail, etPassword;
+    Button btnRegister;
+    TextView txtLogin;
+    FirebaseAuth auth;
+    FirebaseFirestore db;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_driver); // 👈 note this name matches your XML
+        setContentView(R.layout.activity_driver);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        FirebaseApp.initializeApp(this);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Registering driver...");
+
+        etName = findViewById(R.id.etName);
+        etBusNumber = findViewById(R.id.etBusNumber);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        btnRegister = findViewById(R.id.btnRegister);
+        txtLogin = findViewById(R.id.txtLogin);
+
+        txtLogin.setOnClickListener(v -> {
+            Intent i = new Intent(Driver.this, Login.class);
+            startActivity(i);
         });
-        findViewById(R.id.txtLogin).setOnClickListener(v -> {
-            Toast.makeText(Driver.this, "Login Text Clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Driver.this, Login.class);
-            startActivity(intent);
-        });
-        findViewById(R.id.btnRegister).setOnClickListener(v -> {
-            Toast.makeText(Driver.this, "Login Text Clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Driver.this, MapsActivity.class);
-            startActivity(intent);
-        });
+
+        btnRegister.setOnClickListener(v -> registerDriver());
+    }
+
+    private void registerDriver() {
+        String name = etName.getText().toString().trim();
+        String busNumber = etBusNumber.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+
+        // ✅ Empty fields check
+        if (name.isEmpty() || busNumber.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // ✅ Strict email format check (only valid emails allowed)
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Invalid email format! Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // ✅ Password length check (minimum 6 characters)
+        if (password.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressDialog.show();
+
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    String uid = auth.getCurrentUser().getUid();
+
+                    Map<String, Object> driver = new HashMap<>();
+                    driver.put("name", name);
+                    driver.put("busNumber", busNumber);
+                    driver.put("email", email);
+
+                    db.collection("Driver").document(uid)
+                            .set(driver)
+                            .addOnSuccessListener(unused -> {
+                                progressDialog.dismiss();
+                                Toast.makeText(this, "Driver Registered Successfully!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Driver.this, MapsActivity.class));
+                                finish();
+                            })
+                            .addOnFailureListener(e -> {
+                                progressDialog.dismiss();
+                                Toast.makeText(this, "Firestore Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "Auth Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }
